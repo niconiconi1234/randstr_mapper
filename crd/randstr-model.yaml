@@ -1,0 +1,13 @@
+apiVersion: devices.kubeedge.io/v1alpha2
+kind: DeviceModel
+metadata:
+  name: randstr-model
+  namespace: default
+spec:
+  properties:
+    - name: randstr
+      description: random string
+      type:
+        string:
+          accessMode: ReadWrite
+          defaultValue: "hello"

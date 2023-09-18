@@ -1,0 +1,38 @@
+apiVersion: devices.kubeedge.io/v1alpha2
+kind: Device
+metadata:
+  name: randstr-instance-01
+  labels:
+    model: randstr-model
+spec:
+  deviceModelRef:
+    name: randstr-model
+  protocol:
+    customizedProtocol:
+      protocolName: randstr-virtual-protocol
+      configData:
+        length: 10
+    common:
+      customizedValues:
+        protocolID: 1
+  nodeSelector:
+    nodeSelectorTerms:
+      - matchExpressions:
+          - key: ""
+            operator: In
+            values:
+              - orangepi3b #pls give your edge node name
+  propertyVisitors:
+    - propertyName: randstr
+      customizedProtocol:
+        protocolName: randstr-virtual-protocol
+        configData:
+          length: 10
+status:
+  twins:
+    - propertyName: randstr
+      reported:
+        metadata:
+          timestamp: '1550049403598'
+          type: string
+        value: "hello"

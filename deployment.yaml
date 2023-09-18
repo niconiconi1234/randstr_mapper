@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: randstr-mapper-deployment
+spec:
+  selector:
+    matchLabels:
+      app: randstr-mapper
+  template:
+    metadata:
+      labels:
+        app: randstr-mapper
+    spec:
+      restartPolicy: Always
+      hostNetwork: true
+      containers:
+      - name: randstr-mapper
+        image: huajuan6848/randstr_mapper:0.0.1
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/kubeedge
+      nodeSelector:
+        kubernetes.io/hostname: orangepi3b
+      volumes:
+      - name: config-volume
+        configMap:
+          name: device-profile-config-orangepi3b
+
